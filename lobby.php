@@ -86,12 +86,11 @@
         <div id="greenroom">
             <form action="javascript:;" onsubmit="sendMessage(this)">
                 <input type="text" name="typedmsg" id="typedmsg" placeholder="ENTER message here..." maxlength="64" />
-                <input type="hidden" name="lobby" value="<?php echo $lobbyInfo['lid']; ?>" />
-                <input type="hidden" name="ip" value="<?php echo $_SERVER['REMOTE_ADDR']; ?>">
             </form>
         </div>
 
         <input type="hidden" id="lobby" value="<?php echo $lobbyInfo['lid']; ?>" />
+        <input type="hidden" id="lobbyct" value="<?php echo $lobbyInfo['creation_time']; ?>" />
     </body>
 
     <script>
@@ -100,7 +99,7 @@
             $.ajax({
                 type: "GET",
                 url: "send_message.php",
-                data: {message:form.typedmsg.value, lobbyID:form.lobby.value, ip:form.ip.value},
+                data: {message:form.typedmsg.value, lobbyID:document.getElementById("lobby").value, lobbyCT:document.getElementById("lobbyct").value},
                 dataType: 'text',
                 success: function(data) {
                 }
